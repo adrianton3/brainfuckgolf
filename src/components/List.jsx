@@ -19,13 +19,13 @@
 			return (
 				<ul>
 					{this.props.items.filter(Boolean)
-						.map(({ length, record }, index) =>
+						.map(({ result, length, record }) =>
 							<Item
-								key={index}
-								value={index}
+								key={result}
+								value={result}
 								length={length}
-								record={records.has(index)}
-								onClick={() => { this.props.onClick(index) }}
+								record={records.has(result)}
+								onClick={() => { this.props.onClick(result) }}
 							/>
 					)}
 				</ul>

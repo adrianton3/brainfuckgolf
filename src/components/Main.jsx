@@ -41,7 +41,7 @@
 					const { length } = source
 
 					if (!items[result] || length < items[result].length) {
-						items[result] = { length, source }
+						items[result] = { result, length, source }
 
 						if (records.length >= RECORDS_MAX_LENGTH) {
 							records.shift()
