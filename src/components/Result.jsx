@@ -9,15 +9,16 @@
 		propTypes: {
 			result: PropTypes.number,
 			length: PropTypes.number,
-			error: PropTypes.string
+			error: PropTypes.string,
+			pointer: PropTypes.number
 		},
 
 		render () {
-			const { result, length, error } = this.props
+			const { result, length, error, pointer } = this.props
 
 			return typeof result === 'number' ? (
 				<div className="result">
-					<span className="fade">mem[0]:&nbsp;</span>
+					<span className="fade">mem[{pointer}]:&nbsp;</span>
 					{result}&nbsp;
 					<span className="fade">length:&nbsp;</span>
 					{length}

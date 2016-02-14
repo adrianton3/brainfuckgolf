@@ -16,7 +16,7 @@
 
 	const safe = {
 		header: 'var m = new Uint8Array(256);\nvar p = 0;\nvar s = 0;',
-		footer: 'return { result: m[p] };',
+		footer: 'return { result: m[p], pointer: p };',
 		mapping: new Map([
 			['+', 'm[p]++;'],
 			['-', 'm[p]--;'],
