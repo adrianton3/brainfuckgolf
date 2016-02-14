@@ -34,12 +34,13 @@ html, body {
 }
 
 li {
-    padding: 4px;
+    padding: 12px;
     margin: 4px;
     display: inline-block;
-    width: 56px;
-    border: 1px solid #ccd7de;
+    width: 64px;
     text-align: center;
+    border: 1px solid #ccd7de;
+    border-radius: 4px;
 }
 
 ul {
@@ -48,6 +49,10 @@ ul {
 
 .result {
     text-align: center;
-    font-size: 48px;
+    font-size: 32px;
     margin-bottom: 64px;
+}
+
+.fade {
+    color: #ccd7de;
 }

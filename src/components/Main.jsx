@@ -77,13 +77,20 @@
 				<div>
 					<Ace content={source} onChange={this._change} />
 
-					<div className="result">
 					{
-						typeof result === 'number' ?
-						`${result} (${source.length})` :
-						error
+						typeof result === 'number' ? (
+							<div className="result">
+								<span className="fade">mem[0]:&nbsp;</span>
+								{result}&nbsp;
+								<span className="fade">chars:&nbsp;</span>
+								{source.length}
+							</div>
+						) : (
+							<div className="result">
+								{error}
+							</div>
+						)
 					}
-					</div>
 
 					<List
 						items={items}
