@@ -34,7 +34,7 @@
 
 			try {
 				const program = bf.compile(source)
-				const { result, error } = program()
+				const { result, error, pointer } = program()
 
 				if (!error) {
 					const { items, records } = this.state
@@ -52,7 +52,7 @@
 					}
 				}
 
-				this.setState({ result, error })
+				this.setState({ result, error, pointer })
 			} catch (ex) {
 				this.setState({ result: null, error: 'bad program' })
 			}
@@ -63,22 +63,25 @@
 		},
 
 		_setSource (index) {
-			const { source } = this.state.items[index]
-			this.setState({
-				source,
-				result: index
-			})
+			this._change(this.state.items[index].source)
 		},
 
 		render () {
-			const { source, result, error, items, records } = this.state
+			const {
+				source,
+				result,
+				error,
+				pointer,
+				items,
+				records
+			} = this.state
 
 			return (
 				<div>
 					<div className="input-container">
 						<span className="description">
-							For every number from 0 to 255 find the shortest brainfuck program that generates it
-							in the first memory cell.
+							For every number from 0 to 255 find the shortest brainfuck program that generates it.
+							The number should be in the cell indicated by the data pointer after the program terminates.
 						</span>
 						<Input content={source} onChange={this._change} />
 					</div>
@@ -87,6 +90,7 @@
 						result={result}
 						length={source.length}
 						error={error}
+						pointer={pointer}
 					/>
 
 					<List
