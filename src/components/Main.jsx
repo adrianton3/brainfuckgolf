@@ -2,7 +2,7 @@
 	'use strict'
 
 	const { PropTypes } = React
-	const { List, Input } = bf
+	const { Input, Result, List } = bf
 
 	const RECORDS_MAX_LENGTH = 3
 
@@ -83,20 +83,11 @@
 						<Input content={source} onChange={this._change} />
 					</div>
 
-					{
-						typeof result === 'number' ? (
-							<div className="result">
-								<span className="fade">mem[0]:&nbsp;</span>
-								{result}&nbsp;
-								<span className="fade">length:&nbsp;</span>
-								{source.length}
-							</div>
-						) : (
-							<div className="result">
-								{error}
-							</div>
-						)
-					}
+					<Result
+						result={result}
+						length={source.length}
+						error={error}
+					/>
 
 					<List
 						items={items}
