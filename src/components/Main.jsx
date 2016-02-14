@@ -2,7 +2,7 @@
 	'use strict'
 
 	const { PropTypes } = React
-	const { Ace, List } = bf
+	const { List, Input } = bf
 
 	const RECORDS_MAX_LENGTH = 3
 
@@ -75,7 +75,7 @@
 
 			return (
 				<div>
-					<Ace content={source} onChange={this._change} />
+					<Input content={source} onChange={this._change} />
 
 					{
 						typeof result === 'number' ? (
