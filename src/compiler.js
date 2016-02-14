@@ -15,14 +15,14 @@
 	}
 
 	const safe = {
-		header: 'var m = new Uint8Array(256); var p = 0; var s = 0;',
+		header: 'var m = new Uint8Array(256);\nvar p = 0;\nvar s = 0;',
 		footer: 'return { result: m[p] };',
 		mapping: new Map([
 			['+', 'm[p]++;'],
 			['-', 'm[p]--;'],
-			['>', 'p++;'],
-			['<', 'p--;'],
-			['[', 'while (m[p]) { s++; if (s > 1000) { return { error: "timeout" }; }'],
+			['>', 'p++;\nif (p >= 256) { return { error: "pointer out of bounds" }; }'],
+			['<', 'p--;\nif (p < 0) { return { error: "pointer out of bounds" }; }'],
+			['[', 'while (m[p]) {\ns++;\nif (s > 1000) {\nreturn { error: "timeout" };\n}'],
 			[']', '}']
 		])
 	}
@@ -32,7 +32,7 @@
 
 		const commands = source.split('')
 		const translated = commands.map((char) => mapping.get(char))
-		const body = translated.join(' ')
+		const body = translated.join('\n')
 
 		const jsSource = `${header}${body}${footer}`
 
