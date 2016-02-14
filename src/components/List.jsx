@@ -9,10 +9,13 @@
 
 		propTypes: {
 			items: PropTypes.array.isRequired,
+			records: PropTypes.array.isRequired,
 			onClick: PropTypes.func.isRequired
 		},
 
 		render () {
+			const records = new Set(this.props.records)
+
 			return (
 				<ul>
 					{this.props.items.filter(Boolean)
@@ -21,7 +24,7 @@
 								key={index}
 								value={index}
 								length={length}
-								record={record}
+								record={records.has(index)}
 								onClick={() => { this.props.onClick(index) }}
 							/>
 					)}

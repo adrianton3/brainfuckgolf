@@ -4,6 +4,8 @@
 	const { PropTypes } = React
 	const { Ace, List } = bf
 
+	const RECORDS_MAX_LENGTH = 3
+
 	const Main = React.createClass({
 		displayName: 'Main',
 
@@ -21,6 +23,7 @@
 			return {
 				source: '',
 				items: this.props.items || [],
+				records: [],
 				value: 0,
 				error: null
 			}
@@ -34,15 +37,18 @@
 				const { result, error } = program()
 
 				if (!error) {
-					const { items } = this.state
+					const { items, records } = this.state
 					const { length } = source
 
 					if (!items[result] || length < items[result].length) {
-						items[result] = { record: true, length, source }
+						items[result] = { length, source }
+
+						if (records.length >= RECORDS_MAX_LENGTH) {
+							records.shift()
+						}
+						records.push(result)
 
 						localStorage.setItem('items', JSON.stringify(items))
-					} else {
-						items[result].record = false
 					}
 				}
 
@@ -65,7 +71,7 @@
 		},
 
 		render () {
-			const { source, result, error, items } = this.state
+			const { source, result, error, items, records } = this.state
 
 			return (
 				<div>
@@ -79,7 +85,11 @@
 					}
 					</div>
 
-					<List items={items} onClick={this._setSource}/>
+					<List
+						items={items}
+						records={records}
+						onClick={this._setSource}
+					/>
 				</div>
 			)
 		}
