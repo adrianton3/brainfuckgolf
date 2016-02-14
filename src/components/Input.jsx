@@ -19,7 +19,7 @@
 			return (
 				<input
 					type="text"
-					placeholder="Your brainfuck code here"
+					placeholder="Your brainfuck program here"
 					value={this.props.content}
 					onChange={this._handleChange}
 				/>

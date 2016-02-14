@@ -75,14 +75,20 @@
 
 			return (
 				<div>
-					<Input content={source} onChange={this._change} />
+					<div className="input-container">
+						<span className="description">
+							For every number from 0 to 255 find the shortest brainfuck program that generates it
+							in the first memory cell.
+						</span>
+						<Input content={source} onChange={this._change} />
+					</div>
 
 					{
 						typeof result === 'number' ? (
 							<div className="result">
 								<span className="fade">mem[0]:&nbsp;</span>
 								{result}&nbsp;
-								<span className="fade">chars:&nbsp;</span>
+								<span className="fade">length:&nbsp;</span>
 								{source.length}
 							</div>
 						) : (
