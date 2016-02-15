@@ -1,8 +1,11 @@
 (function () {
 	'use strict'
 
+	const MEMORY_SIZE = 256
+	const ITERATIONS_MAX = 1000
+
 	const simple = {
-		header: 'var m = new Uint8Array(256); var p = 0;',
+		header: `var m = new Uint8Array(${MEMORY_SIZE});\nvar p = 0;`,
 		footer: 'return { result: m[p] };',
 		mapping: new Map([
 			['+', 'm[p]++;'],
@@ -15,14 +18,14 @@
 	}
 
 	const safe = {
-		header: 'var m = new Uint8Array(256);\nvar p = 0;\nvar s = 0;',
+		header: `var m = new Uint8Array(${MEMORY_SIZE});\nvar p = 0;\nvar s = 0;`,
 		footer: 'return { result: m[p], pointer: p };',
 		mapping: new Map([
 			['+', 'm[p]++;'],
 			['-', 'm[p]--;'],
-			['>', 'p++;\nif (p >= 256) { return { error: "pointer out of bounds" }; }'],
+			['>', `p++;\nif (p >= ${MEMORY_SIZE}) { return { error: "pointer out of bounds" }; }`],
 			['<', 'p--;\nif (p < 0) { return { error: "pointer out of bounds" }; }'],
-			['[', 'while (m[p]) {\ns++;\nif (s > 1000) {\nreturn { error: "timeout" };\n}'],
+			['[', `while (m[p]) {\ns++;\nif (s > ${ITERATIONS_MAX}) {\nreturn { error: "timeout" };\n}`],
 			[']', '}']
 		])
 	}

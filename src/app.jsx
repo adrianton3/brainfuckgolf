@@ -3,7 +3,7 @@
 
 	const { Main } = bf
 
-	const items = JSON.parse(localStorage.getItem('items'))
+	const items = JSON.parse(localStorage.getItem('solutions'))
 
 	React.render(
 		<Main items={items} />,
