@@ -50,7 +50,7 @@
 						}
 						records.push(result)
 
-						localStorage.setItem('items', JSON.stringify(items))
+						localStorage.setItem('solutions', JSON.stringify(items))
 					}
 				}
 
