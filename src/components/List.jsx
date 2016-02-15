@@ -18,15 +18,14 @@
 
 			return (
 				<ul>
-					{this.props.items.filter(Boolean)
-						.map(({ result, length, record }) =>
-							<Item
-								key={result}
-								value={result}
-								length={length}
-								record={records.has(result)}
-								onClick={() => { this.props.onClick(result) }}
-							/>
+					{this.props.items.map(({ length, record }, index) =>
+						<Item
+							key={index}
+							value={index}
+							length={length}
+							record={records.has(index)}
+							onClick={() => { this.props.onClick(index) }}
+						/>
 					)}
 				</ul>
 			)
